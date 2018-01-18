@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4572.robot.commands.DriveCommand;
-import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team4572.robot.commands.*;
+import org.usfirst.frc.team4572.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,9 +26,10 @@ import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
 public class Robot extends TimedRobot {
 
 	
-public static final DriveSubsystem drivesubsystem = new DriveSubsystem();
-	
-
+public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+public static final ClawSubsystem clawSubsystem = new ClawSubsystem();
+public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 
 
 
@@ -45,7 +46,7 @@ public static final DriveSubsystem drivesubsystem = new DriveSubsystem();
 	public void robotInit() {
 		m_oi = new OI();
 		m_chooser.addDefault("Drive", new DriveCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addObject("Claw", new ClawCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 

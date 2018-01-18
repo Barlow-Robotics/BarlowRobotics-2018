@@ -19,6 +19,9 @@ public class OI {
 	//Playstation Controller Variable
     public static Joystick playstation = new Joystick(RobotMap.PLAYSTATION_PORT);
     
+    //Logitech Controller
+    public static Joystick logitech = new Joystick(RobotMap.LOGITECH_PORT);
+    
     //Gyroscope Variable
     public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);
     

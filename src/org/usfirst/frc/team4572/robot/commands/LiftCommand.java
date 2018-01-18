@@ -1,19 +1,20 @@
 package org.usfirst.frc.team4572.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
-import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveCommand extends Command {
-
-    public DriveCommand() {
+public class LiftCommand extends Command {
+	private final double speed = 0.5;
+	
+	
+    public LiftCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.driveSubsystem);
+        requires(Robot.liftSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +23,13 @@ public class DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	DriveSubsystem.drive();
+    	
+    	if(OI.logitech.getRawButton(6)) { //Move up if button 6 is pressed
+    	Robot.liftSubsystem.activateLift(speed);
+    	}
+    	else if(OI.logitech.getRawButton(7)) { //Move down if button 7 pressed
+        Robot.liftSubsystem.activateLift(-speed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

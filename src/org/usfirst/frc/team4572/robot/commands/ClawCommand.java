@@ -1,19 +1,18 @@
 package org.usfirst.frc.team4572.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
-import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveCommand extends Command {
+public class ClawCommand extends Command {
 
-    public DriveCommand() {
+    public ClawCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.driveSubsystem);
+        requires(Robot.clawSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +21,7 @@ public class DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	DriveSubsystem.drive();
+    	Robot.clawSubsystem.claw(OI.logitech.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
