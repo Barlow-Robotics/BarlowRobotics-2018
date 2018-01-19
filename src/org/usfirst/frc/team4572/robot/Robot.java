@@ -30,6 +30,7 @@ public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 public static final ClawSubsystem clawSubsystem = new ClawSubsystem();
 public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
+public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubsystem();
 
 
 
@@ -48,6 +49,11 @@ public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 		m_chooser.addDefault("Drive", new DriveCommand());
 		m_chooser.addObject("Claw", new ClawCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		liftSubsystem.getLeftLiftMotor().setInverted(true);
+		ClawSubsystem.getLeftClawMotor().setInverted(true);
+		
+
 	}
 
 	/**

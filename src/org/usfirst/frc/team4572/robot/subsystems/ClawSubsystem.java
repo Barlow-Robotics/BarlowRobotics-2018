@@ -16,11 +16,11 @@ public class ClawSubsystem extends Subsystem {
 
 	
 	
-	public Spark getLeftClawMotor() {
+	public static Spark getLeftClawMotor() {
 		return LeftClawMotor;
 	}
 	
-	public Spark getRightClawMotor() {
+	public static Spark getRightClawMotor() {
 		return RightClawMotor;
 	}
 	
