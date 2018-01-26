@@ -34,7 +34,6 @@ public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubs
 public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
 
 
-
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
@@ -49,12 +48,13 @@ public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
 		m_oi = new OI();
 		m_chooser.addDefault("Drive", new DriveCommand());
 		m_chooser.addObject("Claw", new ClawCommand());
-		m_chooser.addObject("LIDAR", new LIDARCommand());
+		//m_chooser.addObject("LIDAR", new LIDARCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		
-		liftSubsystem.getLeftLiftMotor().setInverted(true);
-		ClawSubsystem.getLeftClawMotor().setInverted(true);
-		
+		//Inversions
+		driveSubsystem.getFrontLeftMotor().setInverted(true);
+		driveSubsystem.getBackLeftMotor().setInverted(true);
+		driveSubsystem.getFrontRightMotor().setInverted(true);
+		driveSubsystem.getBackRightMotor().setInverted(true);
 
 	}
 

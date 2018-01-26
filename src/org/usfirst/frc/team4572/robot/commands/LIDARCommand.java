@@ -1,8 +1,7 @@
 package org.usfirst.frc.team4572.robot.commands;
 
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
-import org.usfirst.frc.team4572.robot.subsystems.LIDARSubsystem;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,16 +11,25 @@ public class LIDARCommand extends Command {
 
     public LIDARCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.lidarSubsystem);
+    	requires(Robot.lidarSubsystem);
     }
-
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.lidarSubsystem.lidarConfig();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(LIDARSubsystem.getDistanceIn());
+    	if(OI.playstation.getRawButton(3)) {
+    	if(Robot.lidarSubsystem.getSuccess()) {
+    		System.out.println("AVAST");
+    		
+    	}
+    	else {
+    		System.out.println("YAYYY");
+    		
+    	}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
