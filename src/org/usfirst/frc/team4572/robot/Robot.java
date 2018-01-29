@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4572.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -48,8 +49,12 @@ public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
 		m_oi = new OI();
 		m_chooser.addDefault("Drive", new DriveCommand());
 		m_chooser.addObject("Claw", new ClawCommand());
-		//m_chooser.addObject("LIDAR", new LIDARCommand());
+		m_chooser.addObject("LIDAR", new LIDARCommand());
+		m_chooser.addDefault("LimeLight", new LimeVisionCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		 //CameraServer.getInstance().startAutomaticCapture();
+		
 		//Inversions
 		driveSubsystem.getFrontLeftMotor().setInverted(true);
 		driveSubsystem.getBackLeftMotor().setInverted(true);

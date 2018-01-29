@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LIDARCommand extends Command {
+public class LIDARCommand extends Command{
 
     public LIDARCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -20,6 +20,8 @@ public class LIDARCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//System.out.println(Robot.lidarSubsystem.getDistanceCm());
+    	
     	if(OI.playstation.getRawButton(3)) {
     	if(Robot.lidarSubsystem.getSuccess()) {
     		System.out.println("AVAST");

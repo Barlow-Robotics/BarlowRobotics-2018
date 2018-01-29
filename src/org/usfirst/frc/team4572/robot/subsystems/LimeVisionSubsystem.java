@@ -32,6 +32,8 @@ public class LimeVisionSubsystem extends Subsystem {
 		table = NetworkTableInstance.getDefault().getTable("limelight");
 	}
 	
+	public void addLimeLightToDash() {
+	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
