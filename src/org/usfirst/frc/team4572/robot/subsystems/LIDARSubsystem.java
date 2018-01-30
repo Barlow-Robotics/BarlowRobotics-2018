@@ -2,8 +2,8 @@ package org.usfirst.frc.team4572.robot.subsystems;
 
 import org.usfirst.frc.team4572.robot.commands.LIDARCommand;
 
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,72 +14,68 @@ public class LIDARSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    private static I2C i2c;
-    public static byte[] distance;
-    private final int LIDAR_ADDR = 0x62;
-    private final static int LIDAR_CONFIG_REGISTER = 0x00;
-    private final static int LIDAR_DISTANCE_REGISTER = 0x8f;
-	
-    public static boolean enabled = true;
-    
-    public void toggleEnable() {
-    	enabled = !enabled;
-    }
-    
-    
     public void initDefaultCommand() {
-    	
         // Set the default command for a subsystem here.
         setDefaultCommand(new LIDARCommand());
-	
     }
     
-    public LIDARSubsystem() {
-    	//Get I2C port from the MXP connector on the RoboRIO
-        i2c = new I2C(Port.kMXP, LIDAR_ADDR);
-        distance = new byte[2];
-    }
-    
+    private static final int CALIBRATION_OFFSET = -10;
 
-
+    private Counter counter;
+    private int printedWarningCount = 5;
 
     /**
-     * Internally return Distance in cm
+     * Create an object for a LIDAR-Lite attached to some digital input on the roboRIO
      * 
-     * @return distance in cm
+     * @param source The DigitalInput or DigitalSource where the LIDAR-Lite is attached (ex: new DigitalInput(9))
      */
-    public static int getDistanceCm() {
-                                
-        return (int) Integer.toUnsignedLong(distance[0] << 8) + Byte.toUnsignedInt(distance[1]);
+    public void initLIDAR(DigitalSource source) {
+    	counter = new Counter(source);
+        counter.setMaxPeriod(1.0);
+        // Configure for measuring rising to falling pulses
+        counter.setSemiPeriodMode(true);
+        counter.reset();
     }
 
     /**
-     * Return Distance in Inches
-     * 
-     * @return distance in inches
+     *  Used to get distance in cm
+     * @param rounded true ? false: Get distance in inches as rounded number?
+     * @return Distance in inches
      */
-    public static double getDistanceIn() { // I made this function better. It used to be part of a PID
-                                    // system. We didn't need a PID system.
-        return (double) getDistanceCm() * 0.393701; // inches cuz Merica.
+    public double getDistanceCm(boolean rounded) {
+    	double cm;
+    	/* If we haven't seen the first rising to falling pulse, then we have no measurement.
+    	 * This happens when there is no LIDAR-Lite plugged in, btw.
+    	 */
+    	if (counter.get() < 1) {
+    		if (printedWarningCount-- > 0) {
+    			System.out.println("LidarLitePWM: waiting for distance measurement");
+    		}
+    		return 0;
+    	}
+    	/* getPeriod returns time in seconds. The hardware resolution is microseconds.
+    	 * The LIDAR-Lite unit sends a high signal for 10 microseconds per cm of distance.
+    	 */
+    	cm = (counter.getPeriod() * 1000000.0 / 10.0) + CALIBRATION_OFFSET;
+    	if(!rounded) {
+    	return cm;
+    	}else {
+       	return  Math.floor(cm*10)/10;
+    	}
     }
-
-
     /**
-     * Read from the sensor and update the internal "distance" variable with the result.
+     *  Used to get distance in Inches
+     * @param rounded true ? false: Get distance in inches as rounded number?
+     * @return Distance in inches
      */
-    public static void updateLIDAR() {
-        i2c.write(LIDAR_CONFIG_REGISTER, 0x04); // Initiate measurement
-        //System.out.println("test");
-        try {
-			Thread.sleep(40);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // Delay for measurement to be taken
-        i2c.read(LIDAR_DISTANCE_REGISTER, 2, distance); // Read in measurement
-        
+    public double getDistanceIn(boolean rounded) {
+    	double in = getDistanceCm(true) * 0.393700787;
+    	if(!rounded) {
+    	return in;
+    	}else {
+    	return  Math.floor(in*10)/10;
+    	}
     }
-
     
     
 }

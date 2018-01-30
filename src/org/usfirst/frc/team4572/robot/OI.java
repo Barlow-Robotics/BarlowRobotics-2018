@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team4572.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -23,7 +22,7 @@ public class OI {
     public static Joystick logitech = new Joystick(RobotMap.LOGITECH_PORT);
     
     //Gyroscope Variable
-    public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);
+    //public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);
     
     
     public static double getDriveJoystickXAxis(){
@@ -36,10 +35,10 @@ public class OI {
     	return playstation.getZ();
     }
     
-    public static double getGyro(){
-    	return analogGyro.getAngle();
-    }
-    
+//    public static double getGyro(){
+//    	return analogGyro.getAngle();
+//    }
+//    
 	/** 
 	* There are a few additional built in buttons you can use. Additionally,
 	* by subclassing Button you can create custom triggers and bind those to

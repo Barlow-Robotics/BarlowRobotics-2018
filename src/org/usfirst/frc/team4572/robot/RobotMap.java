@@ -17,29 +17,29 @@ package org.usfirst.frc.team4572.robot;
 public class RobotMap {
 //MOTORS
 	//Drive
-		public static final int FRONT_LEFT_MOTOR_PORT = 0;
-		public static final int FRONT_RIGHT_MOTOR_PORT = 2;
-		public static final int BACK_LEFT_MOTOR_PORT = 1;
-		public static final int BACK_RIGHT_MOTOR_PORT = 3;
+		public static final int FRONT_LEFT_MOTOR_PORT = 2;
+		public static final int FRONT_RIGHT_MOTOR_PORT = 0;
+		public static final int BACK_LEFT_MOTOR_PORT = 3;
+		public static final int BACK_RIGHT_MOTOR_PORT = 1;
 	//Claw
-		public static final int LEFT_CLAW_PORT = 4;
-		public static final int RIGHT_CLAW_PORT = 5;
+		public static final int CLAW_PORT = 4;
 	//Intake Wheels
-		public static final int LEFT_INTAKE_WHEEL_PORT = 6;
-		public static final int RIGHT_INTAKE_WHEEL_PORT = 7;
+		public static final int LEFT_INTAKE_WHEEL_PORT = 5;
+		public static final int RIGHT_INTAKE_WHEEL_PORT = 6;
 	//Lift System
-		public static final int LEFT_LIFT_MOTOR_PORT = 8;
-		public static final int RIGHT_LIFT_MOTOR_PORT = 9;
+		public static final int LEFT_LIFT_MOTOR_PORT = 7;
+		public static final int RIGHT_LIFT_MOTOR_PORT = 8;
 		
 	
 	
 	
 	//CONTROLLER
-	public static int PLAYSTATION_PORT = 0;
-	public static int LOGITECH_PORT = 1;
+	public static final int PLAYSTATION_PORT = 0;
+	public static final int LOGITECH_PORT = 1;
 	
 	//SENSORS
-	public static int GYROSCOPE_PORT = 0;
+	public static final int GYROSCOPE_PORT = 0;
+	public static final int LIDAR_PORT = 6;
 	
 	
 	// If you are using multiple modules, make sure to define both the port

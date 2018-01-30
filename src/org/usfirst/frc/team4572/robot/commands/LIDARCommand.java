@@ -1,30 +1,29 @@
 package org.usfirst.frc.team4572.robot.commands;
 
 import org.usfirst.frc.team4572.robot.Robot;
-import org.usfirst.frc.team4572.robot.subsystems.LIDARSubsystem;
+import org.usfirst.frc.team4572.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LIDARCommand extends Command {
+public class LIDARCommand extends Command{
 
-	
     public LIDARCommand() {
         // Use requires() here to declare subsystem dependencies
-       requires(Robot.lidarSubsystem);
+    	requires(Robot.lidarSubsystem);
     }
-
     // Called just before this Command runs the first time
     protected void initialize() {
-
+    	Robot.lidarSubsystem.initLIDAR(new DigitalInput(RobotMap.LIDAR_PORT));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	LIDARSubsystem.updateLIDAR();
-    	System.out.println(LIDARSubsystem.getDistanceCm());
+    	System.out.println(Robot.lidarSubsystem.getDistanceIn(true));
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
