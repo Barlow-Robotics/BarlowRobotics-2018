@@ -34,11 +34,12 @@ public class RobotMap {
 	
 	
 	//CONTROLLER
-	public static int PLAYSTATION_PORT = 0;
-	public static int LOGITECH_PORT = 1;
+	public static final int PLAYSTATION_PORT = 0;
+	public static final int LOGITECH_PORT = 1;
 	
 	//SENSORS
-	public static int GYROSCOPE_PORT = 0;
+	public static final int GYROSCOPE_PORT = 0;
+	public static final int LIDAR_PORT = 6;
 	
 	
 	// If you are using multiple modules, make sure to define both the port
