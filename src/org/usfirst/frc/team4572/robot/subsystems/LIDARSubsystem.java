@@ -19,7 +19,7 @@ public class LIDARSubsystem extends Subsystem {
         setDefaultCommand(new LIDARCommand());
     }
     
-    private static final int CALIBRATION_OFFSET = -10;
+    private static final int CALIBRATION_OFFSET = -6;
 
     private Counter counter;
     private int printedWarningCount = 5;

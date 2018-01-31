@@ -52,6 +52,7 @@ public static final EncoderTestSubsystem encoderTestSubsystem = new EncoderTestS
 		m_chooser.addObject("LIDAR", new LIDARCommand());
 		m_chooser.addObject("LimeLight", new LimeVisionCommand());
 		m_chooser.addObject("EncoderTest", new EncoderTestCommand());
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		 //CameraServer.getInstance().startAutomaticCapture();

@@ -26,10 +26,10 @@ public class ClawCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(OI.playstation.getRawButton(5)) { //Move up if button 5 is pressed
-    		extension += 0.005;
+    		extension += 0.001;
     	}
     	else if(OI.playstation.getRawButton(6)) { //Move down if button 6 pressed
-    		extension -= 0.005;
+    		extension -= 0.001;
     	}
     	if(oldextension != extension) {
     	Robot.clawSubsystem.actuateClaw(extension);
