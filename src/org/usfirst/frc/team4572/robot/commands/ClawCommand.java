@@ -32,7 +32,7 @@ public class ClawCommand extends Command {
     		extension -= 0.005;
     	}
     	if(oldextension != extension) {
-    	Robot.clawSubsystem.claw(extension);
+    	Robot.clawSubsystem.actuateClaw(extension);
     	oldextension = extension;
     	}
     }

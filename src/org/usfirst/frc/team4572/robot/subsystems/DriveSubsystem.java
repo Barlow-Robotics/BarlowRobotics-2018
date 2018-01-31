@@ -41,10 +41,10 @@ public class DriveSubsystem extends Subsystem {
 	}
     
 	//Main Drive Function(called by DriveCommand)
-    public static void drive() {
+    public static void mecanumDrive() {
     	
     //Tell Robot to drive
-    m_robotDrive.driveCartesian(OI.getDriveJoystickYAxis(), OI.getDriveJoystickXAxis(), OI.getDriveJoystickZAxis(), 0);
+    m_robotDrive.driveCartesian(OI.getPlaystationY(), OI.getPlaystationX(), OI.getPlaystationZ(), 0);
     }
     
 }

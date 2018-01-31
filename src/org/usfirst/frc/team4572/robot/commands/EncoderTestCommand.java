@@ -1,29 +1,32 @@
 package org.usfirst.frc.team4572.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
-import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveCommand extends Command {
+public class EncoderTestCommand extends Command {
 
-    public DriveCommand() {
+    public EncoderTestCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.driveSubsystem);
+        requires(Robot.encoderTestSubsystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	DriveSubsystem.m_robotDrive.setSafetyEnabled(false);
+    	Robot.encoderTestSubsystem.testEncoder.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	DriveSubsystem.mecanumDrive();
+    	double count = Robot.encoderTestSubsystem.testEncoder.getDistance();
+    	if(OI.logitech.getRawButton(3)) {
+    		Robot.encoderTestSubsystem.testMotor.set(0.5);
+    		System.out.println(count);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

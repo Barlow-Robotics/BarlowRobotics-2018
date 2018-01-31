@@ -24,7 +24,7 @@ public class RobotMap {
 	//Claw
 		public static final int CLAW_PORT = 4;
 	//Intake Wheels
-		public static final int LEFT_INTAKE_WHEEL_PORT = 5;
+		public static final int LEFT_INTAKE_WHEEL_PORT = 9;
 		public static final int RIGHT_INTAKE_WHEEL_PORT = 6;
 	//Lift System
 		public static final int LEFT_LIFT_MOTOR_PORT = 7;

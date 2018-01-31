@@ -27,7 +27,7 @@ public class ClawSubsystem extends Subsystem {
     }
     
     
-    public void claw(double speed) {
+    public void actuateClaw(double speed) {
     	clawActuator.set(speed);
     }
 }

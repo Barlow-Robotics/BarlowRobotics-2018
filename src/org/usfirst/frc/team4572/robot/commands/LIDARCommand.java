@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4572.robot.commands;
 
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
 import org.usfirst.frc.team4572.robot.RobotMap;
 
@@ -22,8 +23,9 @@ public class LIDARCommand extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(OI.logitech.getRawButton(2)) {
     	System.out.println(Robot.lidarSubsystem.getDistanceIn(true));
-
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
