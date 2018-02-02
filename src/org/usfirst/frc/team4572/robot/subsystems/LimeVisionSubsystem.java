@@ -5,6 +5,7 @@ import org.usfirst.frc.team4572.robot.commands.LimeVisionCommand;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.Vector2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -27,7 +28,9 @@ public class LimeVisionSubsystem extends Subsystem {
 	public double LEDMode;
 	public double camMode;
 	public double pipeline;
-	
+
+
+	public static final Vector2d resolution = new Vector2d(120,120);
 	
 	public NetworkTable getLimetable() {
 		return NetworkTableInstance.getDefault().getTable("limelight");

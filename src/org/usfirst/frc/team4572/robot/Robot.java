@@ -33,7 +33,7 @@ public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubsystem();
 public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
 public static final EncoderTestSubsystem encoderTestSubsystem = new EncoderTestSubsystem();
-public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem();
+public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem(limeVisionSubsystem);
 //public static final AutonomousSubsystem AutoSusystem = new AutonomousSubsystem();
 
 

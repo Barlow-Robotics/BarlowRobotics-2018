@@ -44,7 +44,7 @@ public class DriveSubsystem extends Subsystem {
     public static void mecanumDrive() {
     	
     //Tell Robot to drive
-    //m_robotDrive.driveCartesian(OI.getPlaystationY(), OI.getPlaystationX(), OI.getPlaystationZ(), 0);
+    m_robotDrive.driveCartesian(OI.getPlaystationY(), -OI.getPlaystationX(), OI.getPlaystationZ(), 0);
     }
     
 }

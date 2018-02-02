@@ -38,13 +38,13 @@ public class EncoderTestCommand extends Command {
 
 
 
-    	if(OI.logitech.getRawButton(3)) {
-    		Robot.encoderTestSubsystem.testMotor.set(0.15);
-    	}
-    	else {
-    		Robot.encoderTestSubsystem.testMotor.set(0.0);
-    		
-    	}
+//    	if(OI.logitech.getRawButton(3)) {
+//    		Robot.encoderTestSubsystem.testMotor.set(0.15);
+//    	}
+//    	else {
+//    		Robot.encoderTestSubsystem.testMotor.set(0.0);
+//    		
+//    	}
 		SmartDashboard.putNumber("Encoder count", Robot.encoderTestSubsystem.count);
     }
 

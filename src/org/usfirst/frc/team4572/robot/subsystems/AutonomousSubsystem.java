@@ -18,7 +18,7 @@ public class AutonomousSubsystem {
 	
 	public LimeVisionSubsystem limeLight;
 	
-	public int lines2Cross;
+	public int linesToCross;
 	
 	/* 
 	 * PROBLEMS TO WORK OUT:
@@ -35,11 +35,22 @@ public class AutonomousSubsystem {
 		this.limeLight = limeLight;
 	}
 	
+	
+	public boolean DetectLineCross() {
+		if(!limeLight.hasTarget) return false;
+		
+		//limeLight.xOffset + limeLight.
+		
+		
+		
+		return true;
+	}
+	
 	public void deposit() {
 		if((robotSide + switchSide) == 0) {
 			if(initVars) {
 				//Do init Stuff
-				lines2Cross = 2;
+				linesToCross = 2;
 				
 				initVars = false;
 			}
@@ -53,7 +64,7 @@ public class AutonomousSubsystem {
 			switch(robotSide) {
 			case Side.left:
 				
-				if(lines2Cross != 0) {
+				if(linesToCross != 0) {
 					strafe(Side.left);
 					
 				}
@@ -66,10 +77,10 @@ public class AutonomousSubsystem {
 			}
 			/*
 			 * if(LINE_CROSSED){
-			 * lines2Cross--;
+			 * linesToCross--;
 			 * }
 			 * 
-			 * if(lines2Cross == 0){
+			 * if(linesToCross == 0){
 			 * if(LIDAR.distanceinCM != front of bot)
 			 * forward();
 			 * }else{
@@ -103,7 +114,7 @@ public class AutonomousSubsystem {
 		}else {
 			if(initVars) {
 				//Do init Stuff
-				lines2Cross = 1;
+				linesToCross = 1;
 				
 				initVars = false;
 			}

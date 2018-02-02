@@ -32,6 +32,13 @@ public class LimeVisionCommand extends Command {
     	if(OI.logitech.getRawButtonPressed(10)) {
     		Robot.limeVisionSubsystem.switchLED();
     	}
+    	if(OI.logitech.getRawButtonPressed(11)) {
+    		if(Robot.limeVisionSubsystem.getPipeline() == 0)
+    		Robot.limeVisionSubsystem.setPipeline(1);
+    		else {
+        	Robot.limeVisionSubsystem.setPipeline(0);
+    		}
+    	}
     	//System.out.println(Robot.limeVisionSubsystem.getXOffset());
     }
 
