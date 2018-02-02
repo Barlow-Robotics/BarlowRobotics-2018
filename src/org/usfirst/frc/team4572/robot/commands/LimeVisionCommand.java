@@ -18,18 +18,21 @@ public class LimeVisionCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		
+    	if(Robot.limeVisionSubsystem.getLEDMode() == 1) {
+    		Robot.limeVisionSubsystem.switchLED();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(OI.logitech.getRawButtonReleased(8)) {
+    	if(OI.logitech.getRawButtonPressed(8)) {
     		Robot.limeVisionSubsystem.setPipeline(1.0);
     		
     	}
     	if(OI.logitech.getRawButtonPressed(10)) {
     		Robot.limeVisionSubsystem.switchLED();
     	}
+    	//System.out.println(Robot.limeVisionSubsystem.getXOffset());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,5 +47,8 @@ public class LimeVisionCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	if(Robot.limeVisionSubsystem.getLEDMode() == 0) {
+    		Robot.limeVisionSubsystem.switchLED();
+    	}
     }
 }

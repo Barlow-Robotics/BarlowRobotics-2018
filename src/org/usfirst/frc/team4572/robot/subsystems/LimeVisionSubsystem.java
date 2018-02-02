@@ -18,21 +18,19 @@ public class LimeVisionSubsystem extends Subsystem {
 	private NetworkTable limeTable;
 	
 	//Create variables
-	double targetD;
-	boolean hasTarget;
-	double xOffset;
-	double yOffset;
-	double area;
-	double skew;
-	double LEDMode;
-	double camMode;
-	double pipeline;
+	public double targetD;
+	public boolean hasTarget;
+	public double xOffset;
+	public double yOffset;
+	public double area;
+	public double skew;
+	public double LEDMode;
+	public double camMode;
+	public double pipeline;
 	
-	public void addLimeLightToDash() {
-	}
 	
 	public NetworkTable getLimetable() {
-		return NetworkTableInstance.getDefault().getTable("LimeLight");
+		return NetworkTableInstance.getDefault().getTable("limelight");
 	}
 
 	public void setLimetable(NetworkTable table) {

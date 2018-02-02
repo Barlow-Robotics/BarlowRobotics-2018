@@ -33,6 +33,8 @@ public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubsystem();
 public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
 public static final EncoderTestSubsystem encoderTestSubsystem = new EncoderTestSubsystem();
+public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem();
+//public static final AutonomousSubsystem AutoSusystem = new AutonomousSubsystem();
 
 
 	public static OI m_oi;
@@ -48,10 +50,10 @@ public static final EncoderTestSubsystem encoderTestSubsystem = new EncoderTestS
 	public void robotInit() {
 		m_oi = new OI();
 		m_chooser.addDefault("Drive", new DriveCommand());
+		m_chooser.addObject("EncoderTest", new EncoderTestCommand());
 		m_chooser.addObject("Claw", new ClawCommand());
 		m_chooser.addObject("LIDAR", new LIDARCommand());
 		m_chooser.addObject("LimeLight", new LimeVisionCommand());
-		m_chooser.addObject("EncoderTest", new EncoderTestCommand());
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
@@ -94,7 +96,9 @@ public static final EncoderTestSubsystem encoderTestSubsystem = new EncoderTestS
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
-
+		
+		
+		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

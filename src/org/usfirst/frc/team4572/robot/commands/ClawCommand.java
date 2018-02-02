@@ -2,7 +2,6 @@ package org.usfirst.frc.team4572.robot.commands;
 
 import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -26,11 +25,17 @@ public class ClawCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(OI.playstation.getRawButton(5)) { //Move up if button 5 is pressed
-    		extension += 0.001;
+    		if(!(extension >= 1))
+    		extension += 0.005;
     	}
     	else if(OI.playstation.getRawButton(6)) { //Move down if button 6 pressed
-    		extension -= 0.001;
-    	}
+    		if(!(extension <= 0))
+    		extension -= 0.005;
+    	}  
+	else if(OI.playstation.getRawButton(7)) { //Move down if button 6 pressed
+		extension = 0.7;
+	}    
+
     	if(oldextension != extension) {
     	Robot.clawSubsystem.actuateClaw(extension);
     	oldextension = extension;
