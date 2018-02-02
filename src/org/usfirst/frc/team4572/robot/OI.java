@@ -25,13 +25,13 @@ public class OI {
     //public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);
     
     
-    public static double getDriveJoystickXAxis(){
+    public static double getPlaystationX(){
     	return playstation.getX();
     }
-    public static double getDriveJoystickYAxis(){
+    public static double getPlaystationY(){
     	return playstation.getY();
     }
-    public static double getDriveJoystickZAxis(){
+    public static double getPlaystationZ(){
     	return playstation.getZ();
     }
     
