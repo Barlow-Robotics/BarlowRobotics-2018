@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 public class DriveSubsystem extends Subsystem {
 
 	//Speed Controllers
-	public static Spark frontLeftMotor = new Spark(RobotMap.FRONT_LEFT_MOTOR_PORT);
-	public static Spark frontRightMotor = new Spark(RobotMap.FRONT_RIGHT_MOTOR_PORT);
-	public static Spark backLeftMotor = new Spark(RobotMap.BACK_LEFT_MOTOR_PORT);
-	public static Spark backRightMotor = new Spark(RobotMap.BACK_RIGHT_MOTOR_PORT);
+	public static Spark frontLeftMotor = new Spark(RobotMap.PWM.FRONT_LEFT_MOTOR_PORT);
+	public static Spark frontRightMotor = new Spark(RobotMap.PWM.FRONT_RIGHT_MOTOR_PORT);
+	public static Spark backLeftMotor = new Spark(RobotMap.PWM.BACK_LEFT_MOTOR_PORT);
+	public static Spark backRightMotor = new Spark(RobotMap.PWM.BACK_RIGHT_MOTOR_PORT);
 	
 	//Mecanum Drive Variable... Used to move the robot
 	public static MecanumDrive m_robotDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);

@@ -14,8 +14,8 @@ public class IntakeSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public static Spark leftIntakeMotor = new Spark(RobotMap.LEFT_INTAKE_WHEEL_PORT);
-	public static Spark rightIntakeMotor = new Spark(RobotMap.RIGHT_INTAKE_WHEEL_PORT);
+	public static Spark leftIntakeMotor = new Spark(RobotMap.PWM.LEFT_INTAKE_WHEEL_PORT);
+	public static Spark rightIntakeMotor = new Spark(RobotMap.PWM.RIGHT_INTAKE_WHEEL_PORT);
 	
 	public Spark getLeftIntakeMotor() {
 		return leftIntakeMotor;

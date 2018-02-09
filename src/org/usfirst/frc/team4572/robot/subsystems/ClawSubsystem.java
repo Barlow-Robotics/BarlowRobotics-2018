@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ClawSubsystem extends Subsystem {
 	//public static Spark LeftClawMotor = new Spark(RobotMap.LEFT_CLAW_PORT);
 	//public static Spark RightClawMotor = new Spark(RobotMap.RIGHT_CLAW_PORT);
-	public Servo clawActuator = new Servo(RobotMap.CLAW_PORT);
-
+	public Servo clawActuator1 = new Servo(RobotMap.PWM.CLAW_LEFT_PORT);
+	public Servo clawActuator2 = new Servo(RobotMap.PWM.CLAW_RIGHT_PORT);
 
 	
     // Put methods for controlling this subsystem
@@ -27,8 +27,9 @@ public class ClawSubsystem extends Subsystem {
     }
     
     
-    public void actuateClaw(double speed) {
-    	clawActuator.set(speed);
+    public void actuateClaw(double position) {
+    	clawActuator1.set(position);
+    	clawActuator2.set(position);
     }
 }
 

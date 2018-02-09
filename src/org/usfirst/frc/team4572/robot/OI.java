@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 
 	//Playstation Controller Variable
-    public static Joystick playstation = new Joystick(RobotMap.PLAYSTATION_PORT);
+    public static Joystick playstation = new Joystick(RobotMap.Controllers.PLAYSTATION_PORT);
     
     //Logitech Controller
-    public static Joystick logitech = new Joystick(RobotMap.LOGITECH_PORT);
+    public static Joystick logitech = new Joystick(RobotMap.Controllers.LOGITECH_PORT);
     
     //Gyroscope Variable
     //public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);

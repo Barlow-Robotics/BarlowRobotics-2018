@@ -32,7 +32,6 @@ public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubsystem();
 public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
-public static final EncoderTestSubsystem encoderTestSubsystem = new EncoderTestSubsystem();
 public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem(limeVisionSubsystem);
 //public static final AutonomousSubsystem AutoSusystem = new AutonomousSubsystem();
 
@@ -50,7 +49,7 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 	public void robotInit() {
 		m_oi = new OI();
 		m_chooser.addDefault("Drive", new DriveCommand());
-		m_chooser.addObject("EncoderTest", new EncoderTestCommand());
+		m_chooser.addObject("EncoderTest", new LiftCommand());
 		m_chooser.addObject("Claw", new ClawCommand());
 		m_chooser.addObject("LIDAR", new LIDARCommand());
 		m_chooser.addObject("LimeLight", new LimeVisionCommand());

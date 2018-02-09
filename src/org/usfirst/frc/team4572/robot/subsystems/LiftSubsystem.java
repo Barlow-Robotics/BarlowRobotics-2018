@@ -1,8 +1,10 @@
 package org.usfirst.frc.team4572.robot.subsystems;
 
+import org.usfirst.frc.team4572.robot.Robot;
 import org.usfirst.frc.team4572.robot.RobotMap;
 import org.usfirst.frc.team4572.robot.commands.LiftCommand;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,25 +15,37 @@ public class LiftSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	
-	public static Spark leftLiftMotor = new Spark(RobotMap.LEFT_LIFT_MOTOR_PORT);
-	public static Spark rightLiftMotor = new Spark(RobotMap.RIGHT_LIFT_MOTOR_PORT);
-	
-	public Spark getLeftLiftMotor() {
-		return leftLiftMotor;
-	}
-	
-	public Spark getRightLiftMotor() {
-		return rightLiftMotor;
-	}
-	
+
+	public boolean PAUSE = false;
+	public double count = 0;
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new LiftCommand());
     }
-    public void activateLift(double speed) {
-    	leftLiftMotor.set(speed);
-    	rightLiftMotor.set(speed);
+    
+    
+    public void initThread() {
+    	Thread t = new Thread(new scheduler());
+    	t.start();
     }
+    
+    public Spark leftLiftMotor = new Spark(RobotMap.PWM.LEFT_LIFT_MOTOR_PORT);
+    
+}
+
+
+class scheduler implements Runnable{
+
+	@Override
+	public void run() {
+		
+	    Encoder LiftEncoder = new Encoder(RobotMap.DIO.LIFT_LEFT_ENCODER_PORT[0], RobotMap.DIO.LIFT_LEFT_ENCODER_PORT[1]);
+		while(true) {
+			if(!Robot.liftSubsystem.PAUSE) {
+				Robot.liftSubsystem.count = LiftEncoder.getDistance()/4;
+			}
+		}
+	}
+	
 }
 
