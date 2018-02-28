@@ -30,7 +30,7 @@ public class IntakeSubsystem extends Subsystem {
         setDefaultCommand(new IntakeCommand());
     }
     public void activateIntake(double speed) {
-    	leftIntakeMotor.set(speed);
+    	leftIntakeMotor.set(-speed);
     	rightIntakeMotor.set(speed);
     }
 }

@@ -18,7 +18,6 @@ public class DriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     	DriveSubsystem.m_robotDrive.setSafetyEnabled(false);
     }
 

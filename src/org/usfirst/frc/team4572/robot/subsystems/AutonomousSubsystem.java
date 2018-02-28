@@ -20,6 +20,8 @@ public class AutonomousSubsystem {
 	
 	public int linesToCross;
 	
+	public double time;
+	
 	/* 
 	 * PROBLEMS TO WORK OUT:
 	 * 
@@ -33,20 +35,52 @@ public class AutonomousSubsystem {
 	
 	public AutonomousSubsystem(LimeVisionSubsystem limeLight) {
 		this.limeLight = limeLight;
+		
+		this.limeLight.setPipeline(2);
+		
+		
+	}
+	
+	public void AutonomousEnd() {
+		limeLight.setPipeline(0);
 	}
 	
 	
-	public boolean DetectLineCross() {
-		if(!limeLight.hasTarget) return false;
+	public static final int tolerance = 10;
+	
+	public boolean focusTape() {		
+		if(limeLight.getXOffset() > tolerance || limeLight.getXOffset() < -tolerance) {
+			//focused on target
+			return true;
+		}
 		
+		if((limeLight.getXOffset() > 0 && switchSide == Side.left) || (limeLight.getXOffset() < 0 && switchSide == Side.right)) {
+			strafe(-switchSide);
+		}else if((limeLight.getXOffset() > 0 && switchSide == Side.right) || (limeLight.getXOffset() < 0 && switchSide == Side.left)) {
+			strafe(switchSide);
+		}
+		
+		return false;
+	}
+	
+	public boolean DetectLineCross() {
+		if(!limeLight.hasTarget) { return false;
+		}
 		//limeLight.xOffset + limeLight.
 		
 		
-		
+		else {
 		return true;
+		}
 	}
 	
-	public void deposit() {
+	public void deposit(double time) {
+		this.time = time;
+		if(time < 1.5) {
+			strafe(switchSide);
+		}
+		
+		
 		if((robotSide + switchSide) == 0) {
 			if(initVars) {
 				//Do init Stuff
@@ -54,39 +88,8 @@ public class AutonomousSubsystem {
 				
 				initVars = false;
 			}
-			/* Big boy Cross
-			 *		x
-			 *		|
-			 * ------
-			 * |
-			 * x 
-			*/
-			switch(robotSide) {
-			case Side.left:
-				
-				if(linesToCross != 0) {
-					strafe(Side.left);
-					
-				}
-				
-				break;
-			case Side.right:
-				strafe(Side.right);
-				break;
 			
-			}
-			/*
-			 * if(LINE_CROSSED){
-			 * linesToCross--;
-			 * }
-			 * 
-			 * if(linesToCross == 0){
-			 * if(LIDAR.distanceinCM != front of bot)
-			 * forward();
-			 * }else{
-			 * ClawCommand.activateClaw();
-			 * }
-			 */
+			bigBoyCross();
 			
 			
 		}else if(Math.abs((robotSide + switchSide)) == 2) {
@@ -118,23 +121,68 @@ public class AutonomousSubsystem {
 				
 				initVars = false;
 			}
-			/*Little boy Cross
-			 * x
-			 * |
-			 * ---
-			 *   |
-			 *	 x 
-			*/
-			switch(switchSide) {
-			case Side.left:
-				
-				break;
-			case Side.right:
-			
-				break;
-			
-			}
+			littleBoyCross();
 		}
+	}
+	
+	public void bigBoyCross() {
+		/* Big boy Cross
+		 *		x
+		 *		|
+		 * ------
+		 * |
+		 * x 
+		*/
+		switch(robotSide) {
+		case Side.left:
+			
+			if(linesToCross != 0) {
+				strafe(Side.left);
+				
+			}
+			
+			break;
+		case Side.right:
+			strafe(Side.right);
+			break;
+		
+		}
+		/*
+		 * if(LINE_CROSSED){
+		 * linesToCross--;
+		 * }
+		 * 
+		 * if(linesToCross == 0){
+		 * if(LIDAR.distanceinCM != front of bot)
+		 * forward();
+		 * }else{
+		 * ClawCommand.activateClaw();
+		 * }
+		 */
+	}
+	public void littleBoyCross() {
+		/*Little boy Cross
+		 * x
+		 * |
+		 * ---
+		 *   |
+		 *	 x 
+		*/
+		
+		if(!focusTape()) return;
+		
+		if(!tapeTooClose()) { forward(); return; };
+		
+		//if(!make_claw_move_out_done()) return;
+		//if(!make_claw_drop_cube_done()) return;
+		//if(!make_claw_move_in_done()) return;
+		//if(!move_to_side_done()) return;
+		//if(!move_forward_for_2_seconds()) return;
+		
+	}
+	
+	public boolean tapeTooClose() {
+		return false;
 	}
 	
 	
@@ -156,17 +204,48 @@ public class AutonomousSubsystem {
 		}
 	}
 	
-	
-	public void turn(double angle) {
-		
+	/**
+	 * takes input of a side
+	 */
+	public void turn(int direction) {
+		if(direction == Side.right) {
+		DriveSubsystem.frontLeftMotor.set(1.0);
+		DriveSubsystem.backLeftMotor.set(1.0);
+		DriveSubsystem.frontRightMotor.set(-1.0);
+		DriveSubsystem.frontLeftMotor.set(-1.0);
+		}else if(direction == Side.left){
+			DriveSubsystem.frontLeftMotor.set(-1.0);
+			DriveSubsystem.backLeftMotor.set(-1.0);
+			DriveSubsystem.frontRightMotor.set(1.0);
+			DriveSubsystem.frontLeftMotor.set(1.0);
+		}
 	}
-	public void forward(double distance) {
-		
-		
+	public void forward() {
+		DriveSubsystem.frontLeftMotor.set(1.0);
+		DriveSubsystem.backLeftMotor.set(1.0);
+		DriveSubsystem.frontRightMotor.set(1.0);
+		DriveSubsystem.frontLeftMotor.set(1.0);
+	}
+	public void backwards() {
+		DriveSubsystem.frontLeftMotor.set(1.0);
+		DriveSubsystem.backLeftMotor.set(1.0);
+		DriveSubsystem.frontRightMotor.set(1.0);
+		DriveSubsystem.frontLeftMotor.set(1.0);
 	}
 	
 	public void strafe(int direction) {
-		
+		if(direction == Side.left) {
+			DriveSubsystem.frontLeftMotor.set(-1.0);
+			DriveSubsystem.backLeftMotor.set(1.0);
+			DriveSubsystem.frontRightMotor.set(-1.0);
+			DriveSubsystem.frontLeftMotor.set(1.0);
+		}
+		else if(direction == Side.right) {
+			DriveSubsystem.frontLeftMotor.set(1.0);
+			DriveSubsystem.backLeftMotor.set(-1.0);
+			DriveSubsystem.frontRightMotor.set(1.0);
+			DriveSubsystem.frontLeftMotor.set(-1.0);
+		}
 		
 	}
 	

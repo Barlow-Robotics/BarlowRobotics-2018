@@ -9,7 +9,7 @@
 package org.usfirst.frc.team4572.robot;
 
 /**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * The RobotMap is a mapping from the ports sensors and	 actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
@@ -20,21 +20,21 @@ public class RobotMap {
 	
 	public static final class PWM{
 		//Drive
-		public static final int FRONT_LEFT_MOTOR_PORT = 2;
-		public static final int FRONT_RIGHT_MOTOR_PORT = 0;
-		public static final int BACK_LEFT_MOTOR_PORT = 3;
-		public static final int BACK_RIGHT_MOTOR_PORT = 1;
+		public static final int FRONT_LEFT_MOTOR_PORT = 0;
+		public static final int FRONT_RIGHT_MOTOR_PORT = 1;
+		public static final int BACK_LEFT_MOTOR_PORT = 2;
+		public static final int BACK_RIGHT_MOTOR_PORT = 3;
 	//Claw
 		public static final int CLAW_LEFT_PORT = 4;
 		public static final int CLAW_RIGHT_PORT = 5;
-		
-	//Intake Wheels
-		public static final int LEFT_INTAKE_WHEEL_PORT = 9;
-		public static final int RIGHT_INTAKE_WHEEL_PORT = 10;
+		public static final int CLAW_EXTEND_MOTOR_PORT = 7;
+
+	//Intake Wheels  
+		public static final int LEFT_INTAKE_WHEEL_PORT = 8;
+		public static final int RIGHT_INTAKE_WHEEL_PORT = 6;
 		
 	//Lift System
-		public static final int LEFT_LIFT_MOTOR_PORT = 7;
-		public static final int RIGHT_LIFT_MOTOR_PORT = 8;
+		public static final int LIFT_MOTOR_PORT = 9;
 	}
 
 		
@@ -45,9 +45,10 @@ public class RobotMap {
 	}
 	//SENSORS
 	public static final class DIO{
-	public static final int GYROSCOPE_PORT = 0;
 	public static final int LIDAR_PORT = 6;
 	public static final int[] LIFT_LEFT_ENCODER_PORT = new int[]{4,3};
+	public static final int EXTENSION_LIMIT_SWITCH_PORT = 0;
+	public static final int VERTICAL_LIMIT_SWITCH_PORT = 1;
 	}
 	
 

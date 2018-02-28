@@ -1,7 +1,9 @@
 package org.usfirst.frc.team4572.robot.commands;
 
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +21,7 @@ public class LiftCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.liftSubsystem.PAUSE = false;
-    	Robot.liftSubsystem.leftLiftMotor.setInverted(true);
+    	Robot.liftSubsystem.liftMotors.setInverted(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,7 +45,20 @@ public class LiftCommand extends Command {
 //    	else {
 //    		Robot.encoderTestSubsystem.testMotor.set(0.0);
 //    		
+    
 //    	}
+    	if(OI.logitech.getRawButton(7)) {
+    		Robot.liftSubsystem.liftMotors.set(-0.3);
+    	}
+    	else if(OI.logitech.getRawButton(6)){
+    		Robot.liftSubsystem.liftMotors.set(0.5);	
+    	}
+    	else{
+    		Robot.liftSubsystem.liftMotors.set(0.0);	
+    	}
+
+    	
+
 		SmartDashboard.putNumber("Encoder count", Robot.liftSubsystem.count);
     }
 

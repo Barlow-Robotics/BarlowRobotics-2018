@@ -21,9 +21,14 @@ public class IntakeCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
-		if (OI.logitech.getRawButton(1)) {
-			Robot.intakeSubsystem.activateIntake(OI.logitech.getZ());
+		if (OI.logitech.getRawButton(4)) {
+			Robot.intakeSubsystem.activateIntake(0.7);
+		}
+		else if(OI.logitech.getRawButton(5)) {
+			Robot.intakeSubsystem.activateIntake(-0.7);	
+		}
+		else{
+			Robot.intakeSubsystem.activateIntake(0.0);
 		}
 	}
 

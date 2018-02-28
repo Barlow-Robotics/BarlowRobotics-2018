@@ -2,8 +2,8 @@ package org.usfirst.frc.team4572.robot.commands;
 
 import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
+import org.usfirst.frc.team4572.robot.subsystems.LimeVisionSubsystem;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -32,15 +32,17 @@ public class LimeVisionCommand extends Command {
     	if(OI.logitech.getRawButtonPressed(10)) {
     		Robot.limeVisionSubsystem.switchLED();
     	}
-    	if(OI.logitech.getRawButtonPressed(11)) {
-    		if(Robot.limeVisionSubsystem.getPipeline() == 0)
+    	if(OI.logitech.getRawButtonPressed(11) && LimeVisionSubsystem.pipelineToggle) {
     		Robot.limeVisionSubsystem.setPipeline(1);
+    		LimeVisionSubsystem.pipelineToggle = !LimeVisionSubsystem.pipelineToggle;
+    	}
     		else {
         	Robot.limeVisionSubsystem.setPipeline(0);
+    		LimeVisionSubsystem.pipelineToggle = !LimeVisionSubsystem.pipelineToggle;
+
     		}
     	}
     	//System.out.println(Robot.limeVisionSubsystem.getXOffset());
-    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

@@ -29,7 +29,7 @@ public class LimeVisionSubsystem extends Subsystem {
 	public double camMode;
 	public double pipeline;
 
-
+	public static boolean pipelineToggle = false;
 	public static final Vector2d resolution = new Vector2d(120,120);
 	
 	public NetworkTable getLimetable() {

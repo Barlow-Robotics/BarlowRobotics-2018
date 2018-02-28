@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4572.robot.commands.*;
 import org.usfirst.frc.team4572.robot.subsystems.*;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -33,7 +32,8 @@ public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubsystem();
 public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
 public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem(limeVisionSubsystem);
-//public static final AutonomousSubsystem AutoSusystem = new AutonomousSubsystem();
+
+
 
 
 	public static OI m_oi;
@@ -63,6 +63,7 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 		driveSubsystem.getBackLeftMotor().setInverted(true);
 		driveSubsystem.getFrontRightMotor().setInverted(true);
 		driveSubsystem.getBackRightMotor().setInverted(true);
+		clawSubsystem.getExtensionMotor().setInverted(true);
 
 	}
 
@@ -109,6 +110,7 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
+		autonomousSubsystem.getSwitchSide();
 	}
 
 	/**
@@ -128,6 +130,8 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		autonomousSubsystem.AutonomousEnd();
+		 
 	}
 
 	/**
