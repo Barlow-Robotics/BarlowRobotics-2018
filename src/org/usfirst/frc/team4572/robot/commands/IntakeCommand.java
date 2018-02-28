@@ -4,6 +4,7 @@ import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -27,7 +28,7 @@ public class IntakeCommand extends Command {
 		else if(OI.logitech.getRawButton(5)) {
 			Robot.intakeSubsystem.activateIntake(-0.7);	
 		}
-		else{
+		else if(!(SmartDashboard.getNumber("LIDAR Distance", 100) < 16.0)){
 			Robot.intakeSubsystem.activateIntake(0.0);
 		}
 	}

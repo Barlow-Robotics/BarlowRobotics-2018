@@ -30,6 +30,7 @@ public class LIDARSubsystem extends Subsystem {
      * @param source The DigitalInput or DigitalSource where the LIDAR-Lite is attached (ex: new DigitalInput(9))
      */
     public void initLIDAR(DigitalSource source) {
+    	if(counter != null) return;
     	counter = new Counter(source);
         counter.setMaxPeriod(1.0);
         // Configure for measuring rising to falling pulses

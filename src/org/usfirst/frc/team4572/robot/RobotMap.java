@@ -46,9 +46,9 @@ public class RobotMap {
 	//SENSORS
 	public static final class DIO{
 	public static final int LIDAR_PORT = 6;
-	public static final int[] LIFT_LEFT_ENCODER_PORT = new int[]{4,3};
-	public static final int EXTENSION_LIMIT_SWITCH_PORT = 0;
-	public static final int VERTICAL_LIMIT_SWITCH_PORT = 1;
+	public static final int EXTENSION_LIMIT_SWITCH_PORT = 1;
+	public static final int RETRACTION_LIMIT_SWITCH_PORT = 0;
+	public static final int VERTICAL_LIMIT_SWITCH_PORT = 2;
 	}
 	
 

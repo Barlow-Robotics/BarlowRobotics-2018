@@ -19,16 +19,16 @@ public class ClawCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//Be sure to set bounds this way in order to use the linear actuator properly!
-		Robot.clawSubsystem.clawActuator1.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
-		Robot.clawSubsystem.clawActuator2.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
+		Robot.clawSubsystem.clawActuatorLeft.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
+		Robot.clawSubsystem.clawActuatorRight.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
 
     }
-    double oldextension = 10000;
-    double extension = 0;
-    double minExtension = 0.0;
-    double maxExtension = 0.9;
-    double rate = 0.01;
-    double speed = 1;
+    public static double oldextension = 10000;
+    public static double extension = 0;
+    public static double minExtension = 0.0;
+    public static double maxExtension = 0.9;
+    public static double rate = 0.01;
+    public static double speed = 1;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	extension = SmartDashboard.getNumber("Claw Extension", extension);
@@ -41,17 +41,18 @@ public class ClawCommand extends Command {
     		Robot.clawSubsystem.extendClaw(0.0);
     	}
 
-    	if(OI.logitech.getRawButton(3) && !(Robot.clawSubsystem.clawActuator1.getPosition() > maxExtension + 0.05)) { //Move up if trigger pressed
+    	if(OI.logitech.getRawButton(3) && !(Robot.clawSubsystem.clawActuatorLeft.getPosition() > maxExtension + 0.05)) { //Move up if trigger pressed
     		if(extension <= maxExtension)
     		extension += rate;
     	}
     	else if(OI.logitech.getRawButton(2)) { //Move back if button 2 pressed
     		if(extension >= minExtension)
     		extension -= rate;
-    	}  
-    	else if(Robot.lidarSubsystem.getDistanceIn(true)<14.0) {
-    		Robot.clawSubsystem.actuateClaw(minExtension);
-    		
+    	} else if(SmartDashboard.getNumber("LIDAR Distance",100) < 16.0) {
+    		if(extension >= minExtension) {
+    		extension -= rate;
+    		}
+    		Robot.intakeSubsystem.activateIntake(0.7);
     	}
 
     	
@@ -71,7 +72,8 @@ public class ClawCommand extends Command {
     	SmartDashboard.putNumber("Claw Max", maxExtension);
     	SmartDashboard.putNumber("Claw Min", minExtension);
     	SmartDashboard.putNumber("Claw Extension", extension);
-    	SmartDashboard.putBoolean("Limit Switch", Robot.clawSubsystem.limitSwitch.get());
+    	SmartDashboard.putBoolean("Limit Switch HE", Robot.clawSubsystem.limitSwitchExtend.get());
+    	SmartDashboard.putBoolean("Limit Switch HR", Robot.clawSubsystem.limitSwitchRetract.get());
     }
     
     // Make this return true when this Command no longer needs to run execute()

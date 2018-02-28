@@ -15,13 +15,14 @@ public class LIDARCommand extends Command{
     public LIDARCommand() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.lidarSubsystem);
+
     }
     // Called just before this Command runs the first time
     protected void initialize() {
     	try {
     	Robot.lidarSubsystem.initLIDAR(new DigitalInput(RobotMap.DIO.LIDAR_PORT));
     	}catch(Exception e) {
-    		
+    		e.printStackTrace();    	
     	}
     }
 
@@ -42,5 +43,6 @@ public class LIDARCommand extends Command{
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+ 
     }
 }

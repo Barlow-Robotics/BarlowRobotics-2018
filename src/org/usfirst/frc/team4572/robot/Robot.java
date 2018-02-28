@@ -49,12 +49,13 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 	public void robotInit() {
 		m_oi = new OI();
 		m_chooser.addDefault("Drive", new DriveCommand());
-		m_chooser.addObject("EncoderTest", new LiftCommand());
-		m_chooser.addObject("Claw", new ClawCommand());
 		m_chooser.addObject("LIDAR", new LIDARCommand());
+		m_chooser.addObject("Lift Command", new LiftCommand());
 		m_chooser.addObject("LimeLight", new LimeVisionCommand());
+		m_chooser.addObject("Claw", new ClawCommand());
+
 		
-		SmartDashboard.putData("Auto mode", m_chooser);
+		//SmartDashboard.putData("Auto mode", m_chooser);
 		
 		 //CameraServer.getInstance().startAutomaticCapture();
 		

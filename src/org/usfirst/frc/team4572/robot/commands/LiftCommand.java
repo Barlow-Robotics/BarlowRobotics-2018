@@ -3,7 +3,6 @@ package org.usfirst.frc.team4572.robot.commands;
 import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,7 +14,6 @@ public class LiftCommand extends Command {
     public LiftCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.liftSubsystem);
-    	Robot.liftSubsystem.initThread();
     }
 
     // Called just before this Command runs the first time

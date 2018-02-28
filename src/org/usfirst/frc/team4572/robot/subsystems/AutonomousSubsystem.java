@@ -1,6 +1,10 @@
 package org.usfirst.frc.team4572.robot.subsystems;
 
+import org.usfirst.frc.team4572.robot.Robot;
+import org.usfirst.frc.team4572.robot.commands.ClawCommand;
+
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *This is the Auto Code. Here will be the part that controls the robot during autonomous
@@ -51,6 +55,7 @@ public class AutonomousSubsystem {
 	public boolean focusTape() {		
 		if(limeLight.getXOffset() > tolerance || limeLight.getXOffset() < -tolerance) {
 			//focused on target
+			stop();
 			return true;
 		}
 		
@@ -105,15 +110,6 @@ public class AutonomousSubsystem {
 			 * 		|
 			 *		x 
 			*/
-			switch(robotSide) {
-			case Side.left:
-				
-				break;
-			case Side.right:
-			
-				break;
-			
-			}
 		}else {
 			if(initVars) {
 				//Do init Stuff
@@ -160,6 +156,7 @@ public class AutonomousSubsystem {
 		 * }
 		 */
 	}
+	boolean DropCube = true;
 	public void littleBoyCross() {
 		/*Little boy Cross
 		 * x
@@ -168,16 +165,30 @@ public class AutonomousSubsystem {
 		 *   |
 		 *	 x 
 		*/
-		
+		if(DropCube) {
+		//Focus on the tape
 		if(!focusTape()) return;
 		
+		//Move to the tape
 		if(!tapeTooClose()) { forward(); return; };
 		
-		//if(!make_claw_move_out_done()) return;
-		//if(!make_claw_drop_cube_done()) return;
-		//if(!make_claw_move_in_done()) return;
-		//if(!move_to_side_done()) return;
-		//if(!move_forward_for_2_seconds()) return;
+
+		if(!Robot.liftSubsystem.vertLimitSwitch.get()) {Robot.liftSubsystem.liftMotors.set(.5);}
+		//Move the claw out
+		if(!Robot.clawSubsystem.limitSwitchExtend.get()) {Robot.clawSubsystem.extendClaw(.5); return;}
+		//drop cube
+		if(ClawCommand.extension != ClawCommand.maxExtension) {
+		ClawCommand.extension = ClawCommand.maxExtension;
+		Timer.delay(.5);
+		}
+		}
+		DropCube = false;
+		if(!Robot.clawSubsystem.limitSwitchRetract.get()) {Robot.clawSubsystem.extendClaw(-.5); return;}
+		
+		strafe(switchSide);
+		Timer.delay(4);
+		stop();
+		forward();
 		
 	}
 	
@@ -247,6 +258,12 @@ public class AutonomousSubsystem {
 			DriveSubsystem.frontLeftMotor.set(-1.0);
 		}
 		
+	}
+	public void stop() {
+		DriveSubsystem.frontLeftMotor.set(0.0);
+		DriveSubsystem.backLeftMotor.set(0.0);
+		DriveSubsystem.frontRightMotor.set(0.0);
+		DriveSubsystem.frontLeftMotor.set(0.0);
 	}
 	
 }
