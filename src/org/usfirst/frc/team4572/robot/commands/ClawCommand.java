@@ -29,14 +29,17 @@ public class ClawCommand extends Command {
     public static double maxExtension = 0.9;
     public static double rate = 0.01;
     public static double speed = 1;
+    boolean toggleAutoClaw = true;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	extension = SmartDashboard.getNumber("Claw Extension", extension);
     	maxExtension = SmartDashboard.getNumber("Claw Max", maxExtension);
     	minExtension = SmartDashboard.getNumber("Claw Min", minExtension);
-    	
+    	if(OI.playstation.getRawButtonPressed(10)) {
+    		toggleAutoClaw = !toggleAutoClaw;
+    	}
     	if(Math.abs(OI.logitech.getY()) > 0.02) {
-    		Robot.clawSubsystem.extendClaw(OI.logitech.getY() * 0.5);
+    		Robot.clawSubsystem.extendClaw(OI.logitech.getY() * 0.7);
     	} else {
     		Robot.clawSubsystem.extendClaw(0.0);
     	}
@@ -48,11 +51,16 @@ public class ClawCommand extends Command {
     	else if(OI.logitech.getRawButton(2)) { //Move back if button 2 pressed
     		if(extension >= minExtension)
     		extension -= rate;
-    	} else if(SmartDashboard.getNumber("LIDAR Distance",100) < 16.0) {
+    	} else if(SmartDashboard.getNumber("LIDAR Distance",100) < 16.0 && toggleAutoClaw) {
     		if(extension >= minExtension) {
     		extension -= rate;
     		}
-    		Robot.intakeSubsystem.activateIntake(0.7);
+    	}
+    	if(SmartDashboard.getNumber("LIDAR Distance",100) < 30 && toggleAutoClaw) {
+    		if(SmartDashboard.getNumber("LIDAR Distance",100) > 4)
+    		Robot.intakeSubsystem.activateIntake(-1);
+    		else
+        	Robot.intakeSubsystem.activateIntake(0);
     	}
 
     	

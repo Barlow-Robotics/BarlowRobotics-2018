@@ -49,7 +49,7 @@ public class LiftCommand extends Command {
     		Robot.liftSubsystem.liftMotors.set(-0.3);
     	}
     	else if(OI.logitech.getRawButton(6)){
-    		Robot.liftSubsystem.liftMotors.set(0.5);	
+    		Robot.liftSubsystem.liftMotors.set(0.75);	
     	}
     	else{
     		Robot.liftSubsystem.liftMotors.set(0.0);	

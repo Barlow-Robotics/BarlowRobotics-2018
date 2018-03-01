@@ -28,7 +28,7 @@ public class IntakeCommand extends Command {
 		else if(OI.logitech.getRawButton(5)) {
 			Robot.intakeSubsystem.activateIntake(-0.7);	
 		}
-		else if(!(SmartDashboard.getNumber("LIDAR Distance", 100) < 16.0)){
+		else if(!(SmartDashboard.getNumber("LIDAR Distance", 100) < 30.0)){
 			Robot.intakeSubsystem.activateIntake(0.0);
 		}
 	}
@@ -36,6 +36,7 @@ public class IntakeCommand extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return false;
+
 	}
 
 	// Called once after isFinished returns true

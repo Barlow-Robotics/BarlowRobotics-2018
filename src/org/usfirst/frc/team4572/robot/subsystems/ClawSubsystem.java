@@ -39,6 +39,7 @@ public class ClawSubsystem extends Subsystem {
     	clawActuatorLeft.set(position);
     	clawActuatorRight.set(position);
     }
+
     
     public void extendClaw(double speed) {
     	if(speed > 0.0 && !limitSwitchExtend.get()) {
