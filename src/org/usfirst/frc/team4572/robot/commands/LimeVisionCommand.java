@@ -21,6 +21,7 @@ public class LimeVisionCommand extends Command {
     	if(Robot.limeVisionSubsystem.getLEDMode() == 1) {
     		Robot.limeVisionSubsystem.switchLED();
     	}
+    	Robot.limeVisionSubsystem.switchCamera();
     }
 
     // Called repeatedly when this Command is scheduled to run

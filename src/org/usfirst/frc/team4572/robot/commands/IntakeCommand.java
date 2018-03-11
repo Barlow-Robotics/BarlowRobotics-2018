@@ -23,15 +23,17 @@ public class IntakeCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (OI.logitech.getRawButton(4)) {
-			Robot.intakeSubsystem.activateIntake(0.7);
+			Robot.intakeSubsystem.activateIntake(0.9);
 		}
 		else if(OI.logitech.getRawButton(5)) {
-			Robot.intakeSubsystem.activateIntake(-0.7);	
+			Robot.intakeSubsystem.activateIntake(-0.9);
 		}
-		else if(!(SmartDashboard.getNumber("LIDAR Distance", 100) < 30.0)){
+		else {
 			Robot.intakeSubsystem.activateIntake(0.0);
+			
 		}
-	}
+		}
+
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {

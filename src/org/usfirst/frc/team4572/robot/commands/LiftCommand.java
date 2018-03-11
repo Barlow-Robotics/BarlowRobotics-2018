@@ -57,7 +57,7 @@ public class LiftCommand extends Command {
 
     	
 
-		SmartDashboard.putNumber("Encoder count", Robot.liftSubsystem.count);
+		SmartDashboard.putBoolean("Vert Limit", Robot.liftSubsystem.vertLimitSwitch.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()

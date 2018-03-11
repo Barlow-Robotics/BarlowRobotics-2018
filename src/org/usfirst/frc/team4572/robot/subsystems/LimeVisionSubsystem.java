@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LimeVisionSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	
-	//Create network table
-	private NetworkTable limeTable;
+
 	
 	//Create variables
 	public double targetD;
@@ -36,9 +34,6 @@ public class LimeVisionSubsystem extends Subsystem {
 		return NetworkTableInstance.getDefault().getTable("limelight");
 	}
 
-	public void setLimetable(NetworkTable table) {
-		this.limeTable = table;
-	}
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -122,6 +117,7 @@ public class LimeVisionSubsystem extends Subsystem {
 			SmartDashboard.putString("Camera Mode", "Vision");
 		}
 	}
+	
 	
 	
 	//Set the pipeline

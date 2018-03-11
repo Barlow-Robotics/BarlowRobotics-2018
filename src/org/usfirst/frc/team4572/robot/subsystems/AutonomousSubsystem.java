@@ -157,6 +157,7 @@ public class AutonomousSubsystem {
 		 */
 	}
 	boolean DropCube = true;
+	long doneFocusTime = 0;
 	public void littleBoyCross() {
 		/*Little boy Cross
 		 * x
@@ -167,13 +168,20 @@ public class AutonomousSubsystem {
 		*/
 		if(DropCube) {
 		//Focus on the tape
-		if(!focusTape()) return;
+		if(!focusTape()) {
+		return;
+		}else {
+			if(doneFocusTime == 0)
+			doneFocusTime = System.currentTimeMillis();
+		}
 		
+	
 		//Move to the tape
-		if(!tapeTooClose()) { forward(); return; };
+		
+		if(System.currentTimeMillis() - doneFocusTime < 3000) { forward(); return; };
 		
 
-		if(!Robot.liftSubsystem.vertLimitSwitch.get()) {Robot.liftSubsystem.liftMotors.set(.5);}
+		if(System.currentTimeMillis() - doneFocusTime < 5000) {Robot.liftSubsystem.liftMotors.set(.5);}
 		//Move the claw out
 		if(!Robot.clawSubsystem.limitSwitchExtend.get()) {Robot.clawSubsystem.extendClaw(.5); return;}
 		//drop cube
@@ -183,12 +191,6 @@ public class AutonomousSubsystem {
 		}
 		}
 		DropCube = false;
-		if(!Robot.clawSubsystem.limitSwitchRetract.get()) {Robot.clawSubsystem.extendClaw(-.5); return;}
-		
-		strafe(switchSide);
-		Timer.delay(4);
-		stop();
-		forward();
 		
 	}
 	
@@ -232,30 +234,30 @@ public class AutonomousSubsystem {
 		}
 	}
 	public void forward() {
-		DriveSubsystem.frontLeftMotor.set(1.0);
-		DriveSubsystem.backLeftMotor.set(1.0);
-		DriveSubsystem.frontRightMotor.set(1.0);
-		DriveSubsystem.frontLeftMotor.set(1.0);
+		DriveSubsystem.frontLeftMotor.set(-0.3);
+		DriveSubsystem.backLeftMotor.set(-0.3);
+		DriveSubsystem.frontRightMotor.set(0.3);
+		DriveSubsystem.frontLeftMotor.set(0.3);
 	}
 	public void backwards() {
 		DriveSubsystem.frontLeftMotor.set(1.0);
 		DriveSubsystem.backLeftMotor.set(1.0);
 		DriveSubsystem.frontRightMotor.set(1.0);
-		DriveSubsystem.frontLeftMotor.set(1.0);
+		DriveSubsystem.backRightMotor.set(1.0);
 	}
 	
 	public void strafe(int direction) {
 		if(direction == Side.left) {
-			DriveSubsystem.frontLeftMotor.set(-1.0);
-			DriveSubsystem.backLeftMotor.set(1.0);
-			DriveSubsystem.frontRightMotor.set(-1.0);
-			DriveSubsystem.frontLeftMotor.set(1.0);
+			DriveSubsystem.frontLeftMotor.set(0.5);
+			DriveSubsystem.backLeftMotor.set(-0.5);
+			DriveSubsystem.frontRightMotor.set(-0.3);
+			DriveSubsystem.backRightMotor.set(1.0);
 		}
 		else if(direction == Side.right) {
-			DriveSubsystem.frontLeftMotor.set(1.0);
-			DriveSubsystem.backLeftMotor.set(-1.0);
-			DriveSubsystem.frontRightMotor.set(1.0);
-			DriveSubsystem.frontLeftMotor.set(-1.0);
+			DriveSubsystem.frontLeftMotor.set(-0.5);
+			DriveSubsystem.backLeftMotor.set(0.5);
+			DriveSubsystem.frontRightMotor.set(0.3);
+			DriveSubsystem.backRightMotor.set(-1.0);
 		}
 		
 	}

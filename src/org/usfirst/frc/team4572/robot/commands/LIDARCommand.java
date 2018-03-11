@@ -19,6 +19,7 @@ public class LIDARCommand extends Command{
     }
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(Robot.lidarSubsystem.counter != null) return;
     	try {
     	Robot.lidarSubsystem.initLIDAR(new DigitalInput(RobotMap.DIO.LIDAR_PORT));
     	}catch(Exception e) {
@@ -28,7 +29,7 @@ public class LIDARCommand extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("LIDAR Distance",Robot.lidarSubsystem.getDistanceIn(true));
+    	SmartDashboard.putNumber("LIDAR Distance",Robot.lidarSubsystem.getDistanceCm(true));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -21,7 +21,7 @@ public class LIDARSubsystem extends Subsystem {
     
     private static final int CALIBRATION_OFFSET = -6;
 
-    private Counter counter;
+    public static Counter counter;
     private int printedWarningCount = 5;
 
     /**
@@ -30,7 +30,6 @@ public class LIDARSubsystem extends Subsystem {
      * @param source The DigitalInput or DigitalSource where the LIDAR-Lite is attached (ex: new DigitalInput(9))
      */
     public void initLIDAR(DigitalSource source) {
-    	if(counter != null) return;
     	counter = new Counter(source);
         counter.setMaxPeriod(1.0);
         // Configure for measuring rising to falling pulses
@@ -61,7 +60,7 @@ public class LIDARSubsystem extends Subsystem {
     	if(!rounded) {
     	return cm;
     	}else {
-       	return  Math.floor(cm*10)/10;
+       	return Math.floor(cm*10)/10;
     	}
     }
     /**

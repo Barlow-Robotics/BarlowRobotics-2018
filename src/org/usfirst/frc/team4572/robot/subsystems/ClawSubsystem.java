@@ -42,10 +42,10 @@ public class ClawSubsystem extends Subsystem {
 
     
     public void extendClaw(double speed) {
-    	if(speed > 0.0 && !limitSwitchExtend.get()) {
+    	if(speed > 0.0 && !limitSwitchRetract.get()) {
         	extensionMotor.set(speed);
     	}
-    	if (speed < 0.0 && !limitSwitchRetract.get()) {
+    	if (speed < 0.0 && !limitSwitchExtend.get()) {
         	extensionMotor.set(speed);
     	}
     }

@@ -8,10 +8,10 @@
 package org.usfirst.frc.team4572.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4572.robot.commands.*;
 import org.usfirst.frc.team4572.robot.subsystems.*;
@@ -97,8 +97,7 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
-		
-		
+		startTime = System.currentTimeMillis();
 		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -112,14 +111,28 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 			m_autonomousCommand.start();
 		}
 		autonomousSubsystem.getSwitchSide();
+
 	}
+	 static long startTime;
 
 	/**
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+
+		if(System.currentTimeMillis() - startTime < 5000) {
+		Robot.driveSubsystem.getBackLeftMotor().set(-0.3);
+		Robot.driveSubsystem.getBackRightMotor().set(0.3);
+		Robot.driveSubsystem.getFrontLeftMotor().set(-0.3);
+		Robot.driveSubsystem.getFrontRightMotor().set(0.3);
+		}
+		else {
+		Robot.driveSubsystem.getBackLeftMotor().set(0);
+		Robot.driveSubsystem.getBackRightMotor().set(0);
+		Robot.driveSubsystem.getFrontLeftMotor().set(0);
+		Robot.driveSubsystem.getFrontRightMotor().set(0);
+		}
 	}
 
 	@Override
@@ -128,6 +141,7 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
