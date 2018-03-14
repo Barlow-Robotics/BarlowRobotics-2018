@@ -19,13 +19,12 @@ public class ClawCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//Be sure to set bounds this way in order to use the linear actuator properly!
-		Robot.clawSubsystem.clawActuatorLeft.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
-		Robot.clawSubsystem.clawActuatorRight.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
+		Robot.clawSubsystem.clawActuator.setBounds(2.0, 2.0, 1.5, 1.0, 1.0);
 
     }
     public static double oldextension = 10000;
     public static double extension = 0;
-    public static double minExtension = 0.53;
+    public static double minExtension = 0.0;
     public static double maxExtension = 0.9;
     public static double rate = 0.01;
     public static double speed = 1;
@@ -41,13 +40,15 @@ public class ClawCommand extends Command {
     		Robot.clawSubsystem.extendClaw(0.0);
     	}
 
-    	if(OI.logitech.getRawButton(3) && !(Robot.clawSubsystem.clawActuatorLeft.getPosition() > maxExtension + 0.05)) { //Move up if trigger pressed
-    		if(extension <= maxExtension)
-    		extension += rate;
+    	if(OI.logitech.getRawButton(3) && !(Robot.clawSubsystem.clawActuator.getPosition() > maxExtension + 0.05)) { //Move up if trigger pressed
+//    		if(extension <= maxExtension)
+//    		extension += rate;
+    		extension = maxExtension;
     	}
     	else if(OI.logitech.getRawButton(2)) { //Move back if button 2 pressed
-    		if(extension >= minExtension)
-    		extension -= rate;
+//    		if(extension >= minExtension)
+//    		extension -= rate;
+    		extension = minExtension;
     	}
 //    	if(SmartDashboard.getNumber("LIDAR Distance",100) < 30 && SmartDashboard.getNumber("LIDAR Distance",100) > 4) {
 //    		Robot.intakeSubsystem.activateIntake(-1);

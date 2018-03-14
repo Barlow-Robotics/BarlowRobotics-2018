@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ClawSubsystem extends Subsystem {
 	//public static Spark LeftClawMotor = new Spark(RobotMap.LEFT_CLAW_PORT);
 	//public static Spark RightClawMotor = new Spark(RobotMap.RIGHT_CLAW_PORT);
-	public Servo clawActuatorLeft = new Servo(RobotMap.PWM.CLAW_LEFT_PORT);
-	public Servo clawActuatorRight = new Servo(RobotMap.PWM.CLAW_RIGHT_PORT);
+	public Servo clawActuator = new Servo(RobotMap.PWM.CLAW_PORT);
 	public Spark extensionMotor = new Spark(RobotMap.PWM.CLAW_EXTEND_MOTOR_PORT);
 	public DigitalInput limitSwitchExtend = new DigitalInput(RobotMap.DIO.EXTENSION_LIMIT_SWITCH_PORT);
 	public DigitalInput limitSwitchRetract = new DigitalInput(RobotMap.DIO.RETRACTION_LIMIT_SWITCH_PORT);
@@ -36,8 +35,7 @@ public class ClawSubsystem extends Subsystem {
     	
     }
     public void actuateClaw(double position) {
-    	clawActuatorLeft.set(position);
-    	clawActuatorRight.set(position);
+    	clawActuator.set(position);
     }
 
     

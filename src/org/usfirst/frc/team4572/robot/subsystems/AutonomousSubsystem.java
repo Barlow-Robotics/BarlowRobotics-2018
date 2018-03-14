@@ -21,17 +21,13 @@ public class AutonomousSubsystem {
 	public int switchSide;	
 	
 	public LimeVisionSubsystem limeLight;
-	
-	public int linesToCross;
-	
+		
 	public double time;
 	
 	/* 
 	 * PROBLEMS TO WORK OUT:
 	 * 
-	 * 1. There is a big stack of cubes in the center of the switch
-	 * 2. Will the mecanum wheels work correctly?
-	 * 3. Detecting where to go.
+	 * 1. Will the mecanum wheels work correctly?
 	 * 
 	 */
 	
@@ -41,8 +37,6 @@ public class AutonomousSubsystem {
 		this.limeLight = limeLight;
 		
 		this.limeLight.setPipeline(2);
-		
-		
 	}
 	
 	public void AutonomousEnd() {
@@ -68,40 +62,32 @@ public class AutonomousSubsystem {
 		return false;
 	}
 	
-	public boolean DetectLineCross() {
-		if(!limeLight.hasTarget) { return false;
-		}
-		//limeLight.xOffset + limeLight.
-		
-		
-		else {
-		return true;
-		}
-	}
-	
-	public void deposit(double time) {
-		this.time = time;
-		if(time < 1.5) {
-			strafe(switchSide);
-		}
+	long startTime;
+	public void deposit() {
+
 		
 		
 		if((robotSide + switchSide) == 0) {
 			if(initVars) {
-				//Do init Stuff
-				linesToCross = 2;
-				
+				startTime = System.currentTimeMillis();
 				initVars = false;
 			}
-			
-			bigBoyCross();
-			
+			//Do nothing because can't reach
+			if(System.currentTimeMillis() - startTime < 5000) {
+				Robot.driveSubsystem.getBackLeftMotor().set(-0.3);
+				Robot.driveSubsystem.getBackRightMotor().set(0.3);
+				Robot.driveSubsystem.getFrontLeftMotor().set(-0.3);
+				Robot.driveSubsystem.getFrontRightMotor().set(0.3);
+				}
+				else {
+				Robot.driveSubsystem.getBackLeftMotor().set(0);
+				Robot.driveSubsystem.getBackRightMotor().set(0);
+				Robot.driveSubsystem.getFrontLeftMotor().set(0);
+				Robot.driveSubsystem.getFrontRightMotor().set(0);
+				}
 			
 		}else if(Math.abs((robotSide + switchSide)) == 2) {
 			if(initVars) {
-				//Do init Stuff
-				
-				
 				initVars = false;
 			}
 			/* Straight
@@ -110,56 +96,39 @@ public class AutonomousSubsystem {
 			 * 		|
 			 *		x 
 			*/
+			if(System.currentTimeMillis() - startTime < 5000) {
+				Robot.driveSubsystem.getBackLeftMotor().set(-0.3);
+				Robot.driveSubsystem.getBackRightMotor().set(0.3);
+				Robot.driveSubsystem.getFrontLeftMotor().set(-0.3);
+				Robot.driveSubsystem.getFrontRightMotor().set(0.3);
+				}
+				else {
+					//Done moving forward
+				Robot.driveSubsystem.getBackLeftMotor().set(0);
+				Robot.driveSubsystem.getBackRightMotor().set(0);
+				Robot.driveSubsystem.getFrontLeftMotor().set(0);
+				Robot.driveSubsystem.getFrontRightMotor().set(0);
+				if(!Robot.clawSubsystem.limitSwitchExtend.get()) {Robot.clawSubsystem.extendClaw(.5); return;}
+				//drop cube
+				}
+				
+			
 		}else {
 			if(initVars) {
-				//Do init Stuff
-				linesToCross = 1;
-				
+				//Do init Stuff				
 				initVars = false;
 			}
-			littleBoyCross();
-		}
-	}
-	
-	public void bigBoyCross() {
-		/* Big boy Cross
-		 *		x
-		 *		|
-		 * ------
-		 * |
-		 * x 
-		*/
-		switch(robotSide) {
-		case Side.left:
-			
-			if(linesToCross != 0) {
-				strafe(Side.left);
-				
+			if(startTime - System.currentTimeMillis() < 1500) {
+				strafe(switchSide);
 			}
-			
-			break;
-		case Side.right:
-			strafe(Side.right);
-			break;
-		
+			middleDeposite();
 		}
-		/*
-		 * if(LINE_CROSSED){
-		 * linesToCross--;
-		 * }
-		 * 
-		 * if(linesToCross == 0){
-		 * if(LIDAR.distanceinCM != front of bot)
-		 * forward();
-		 * }else{
-		 * ClawCommand.activateClaw();
-		 * }
-		 */
 	}
+
 	boolean DropCube = true;
 	long doneFocusTime = 0;
-	public void littleBoyCross() {
-		/*Little boy Cross
+	public void middleDeposite() {
+		/*
 		 * x
 		 * |
 		 * ---
@@ -178,24 +147,16 @@ public class AutonomousSubsystem {
 	
 		//Move to the tape
 		
-		if(System.currentTimeMillis() - doneFocusTime < 3000) { forward(); return; };
-		
+		if(System.currentTimeMillis() - doneFocusTime < 3000) { forward(); return; }
+		else stop();
 
-		if(System.currentTimeMillis() - doneFocusTime < 5000) {Robot.liftSubsystem.liftMotors.set(.5);}
+		
 		//Move the claw out
 		if(!Robot.clawSubsystem.limitSwitchExtend.get()) {Robot.clawSubsystem.extendClaw(.5); return;}
-		//drop cube
-		if(ClawCommand.extension != ClawCommand.maxExtension) {
-		ClawCommand.extension = ClawCommand.maxExtension;
-		Timer.delay(.5);
-		}
+		else Robot.clawSubsystem.extendClaw(0);
 		}
 		DropCube = false;
 		
-	}
-	
-	public boolean tapeTooClose() {
-		return false;
 	}
 	
 	
@@ -217,22 +178,6 @@ public class AutonomousSubsystem {
 		}
 	}
 	
-	/**
-	 * takes input of a side
-	 */
-	public void turn(int direction) {
-		if(direction == Side.right) {
-		DriveSubsystem.frontLeftMotor.set(1.0);
-		DriveSubsystem.backLeftMotor.set(1.0);
-		DriveSubsystem.frontRightMotor.set(-1.0);
-		DriveSubsystem.frontLeftMotor.set(-1.0);
-		}else if(direction == Side.left){
-			DriveSubsystem.frontLeftMotor.set(-1.0);
-			DriveSubsystem.backLeftMotor.set(-1.0);
-			DriveSubsystem.frontRightMotor.set(1.0);
-			DriveSubsystem.frontLeftMotor.set(1.0);
-		}
-	}
 	public void forward() {
 		DriveSubsystem.frontLeftMotor.set(-0.3);
 		DriveSubsystem.backLeftMotor.set(-0.3);
@@ -248,16 +193,16 @@ public class AutonomousSubsystem {
 	
 	public void strafe(int direction) {
 		if(direction == Side.left) {
-			DriveSubsystem.frontLeftMotor.set(0.5);
-			DriveSubsystem.backLeftMotor.set(-0.5);
+			DriveSubsystem.frontLeftMotor.set(0.3);
+			DriveSubsystem.backLeftMotor.set(-0.3);
 			DriveSubsystem.frontRightMotor.set(-0.3);
-			DriveSubsystem.backRightMotor.set(1.0);
+			DriveSubsystem.backRightMotor.set(0.3);
 		}
 		else if(direction == Side.right) {
-			DriveSubsystem.frontLeftMotor.set(-0.5);
-			DriveSubsystem.backLeftMotor.set(0.5);
+			DriveSubsystem.frontLeftMotor.set(-0.3);
+			DriveSubsystem.backLeftMotor.set(0.3);
 			DriveSubsystem.frontRightMotor.set(0.3);
-			DriveSubsystem.backRightMotor.set(-1.0);
+			DriveSubsystem.backRightMotor.set(-0.3);
 		}
 		
 	}

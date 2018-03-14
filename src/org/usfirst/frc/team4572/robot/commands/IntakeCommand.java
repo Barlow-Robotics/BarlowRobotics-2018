@@ -13,7 +13,7 @@ public class IntakeCommand extends Command {
 
 	public IntakeCommand() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.intakeSubsystem);
+	//	requires(Robot.intakeSubsystem);
 	}
 
 	// Called just before this Command runs the first time
@@ -22,16 +22,16 @@ public class IntakeCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (OI.logitech.getRawButton(4)) {
-			Robot.intakeSubsystem.activateIntake(0.9);
-		}
-		else if(OI.logitech.getRawButton(5)) {
-			Robot.intakeSubsystem.activateIntake(-0.9);
-		}
-		else {
-			Robot.intakeSubsystem.activateIntake(0.0);
-			
-		}
+//		if (OI.logitech.getRawButton(4)) {
+//			Robot.intakeSubsystem.activateIntake(0.9);
+//		}
+//		else if(OI.logitech.getRawButton(5)) {
+//			Robot.intakeSubsystem.activateIntake(-0.9);
+//		}
+//		else {
+//			Robot.intakeSubsystem.activateIntake(0.0);
+//			
+//		}
 		}
 
 

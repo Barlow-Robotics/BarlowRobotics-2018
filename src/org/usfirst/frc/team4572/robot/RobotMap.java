@@ -25,13 +25,12 @@ public class RobotMap {
 		public static final int BACK_LEFT_MOTOR_PORT = 8;
 		public static final int BACK_RIGHT_MOTOR_PORT = 3;
 	//Claw
-		public static final int CLAW_LEFT_PORT = 4;
-		public static final int CLAW_RIGHT_PORT = 5;
+		public static final int CLAW_PORT = 4;
 		public static final int CLAW_EXTEND_MOTOR_PORT = 7;
 
 	//Intake Wheels  
-		public static final int LEFT_INTAKE_WHEEL_PORT = 2;
-		public static final int RIGHT_INTAKE_WHEEL_PORT = 6;
+	//	public static final int LEFT_INTAKE_WHEEL_PORT = 2;
+	//	public static final int RIGHT_INTAKE_WHEEL_PORT = 6;
 		
 	//Lift System
 		public static final int LIFT_MOTOR_PORT = 9;

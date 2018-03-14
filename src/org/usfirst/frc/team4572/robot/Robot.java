@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4572.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +28,7 @@ public class Robot extends TimedRobot {
 	
 public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 public static final ClawSubsystem clawSubsystem = new ClawSubsystem();
-public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+//public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 public static final LiftSubsystem liftSubsystem = new LiftSubsystem();
 public static final LimeVisionSubsystem limeVisionSubsystem = new LimeVisionSubsystem();
 public static final LIDARSubsystem lidarSubsystem = new LIDARSubsystem();
@@ -53,7 +54,7 @@ public static final AutonomousSubsystem autonomousSubsystem = new AutonomousSubs
 		m_chooser.addObject("Lift Command", new LiftCommand());
 		m_chooser.addObject("LimeLight", new LimeVisionCommand());
 		m_chooser.addObject("Claw", new ClawCommand());
-
+		CameraServer.getInstance().startAutomaticCapture();
 		
 		//SmartDashboard.putData("Auto mode", m_chooser);
 		
